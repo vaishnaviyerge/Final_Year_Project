@@ -19,7 +19,7 @@ YOLO (You Only Look Once) is a real-time object detection algorithm that identif
 CNN (Convolutional Neural Network) is a type of deep learning model designed for processing and analyzing visual data like images. It uses convolutional layers to automatically detect patterns such as edges, textures, and shapes, making it highly effective for image classification, object detection, and recognition tasks.
 
 
-* Quality Detection Steps -
+Quality Detection Steps -
 
 OVERALL FLOW:
 User uploads product image → frontend sends it to backend → backend uses a model to predict quality → result (confidence score) is returned and shown on frontend.
@@ -104,7 +104,7 @@ Response: { "freshness_score": 0.918 }
 
 UI updates: “Product Quality Score: 91.8%”
 
-*Quantity Detection - 
+Quantity Detection - 
 
 Project Flow: Quantity Prediction
 User uploads image ➝ image sent to backend ➝ YOLO model detects objects ➝ returns count ➝ frontend displays quantity count & visual highlights
@@ -215,7 +215,7 @@ Response: { "quantity": 4 }
 
 UI updates: “Detected Quantity: 4”
 
-* text recognition process
+Text recognition process
 
 Text Detection and Recognition (OCR)
 Goal: Detect and extract printed or handwritten text (like expiry date, batch no, brand name) from product images.
