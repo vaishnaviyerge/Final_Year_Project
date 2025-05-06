@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webcam and Video Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #0000ff;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        nav a {
+            text-decoration: none;
+            color: #0000ff;
+            font-weight: bold;
+        }
+        footer {
+            background-color: #0000ff;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: calc(100vh - 120px);
+        }
+        .box {
+            width: 40%;
+            padding: 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            text-align: center;
+        }
+        .green-box {
+            background-color: #4caf50;
+        }
+        .yellow-box {
+            background-color: #ffeb3b;
+            color: #000;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #0000ff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0000cc;
+        }
+        video {
+            width: 100%;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="#">Home</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="box green-box">
+            <button id="start-camera">Start Camera</button>
+            <button id="stop-camera">Stop Camera</button>
+            <video id="webcam" autoplay muted playsinline style="display: none;"></video>
+        </div>
+        <div class="box yellow-box">
+            <video id="video-box" autoplay muted controls>
+                <source src="{{ video_url }}" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>            
+        </div>
+    </div>
+    <footer>
+        <p>© 2024 Webcam Project</p>
+    </footer>
+    <script>
+        const startButton = document.getElementById("start-camera");
+        const stopButton = document.getElementById("stop-camera");
+        const webcam = document.getElementById("webcam");
+        let stream = null;
+
+        startButton.addEventListener("click", async () => {
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                try {
+                    stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                    webcam.srcObject = stream;
+                    webcam.style.display = "block";
+                } catch (err) {
+                    console.error("Error accessing webcam:", err);
+                }
+            } else {
+                alert("Webcam not supported in this browser.");
+            }
+        });
+
+        stopButton.addEventListener("click", () => {
+            if (stream) {
+                const tracks = stream.getTracks();
+                tracks.forEach((track) => track.stop());
+                webcam.style.display = "none";
+                webcam.srcObject = null;
+            }
+        });
+    </script>
+</body>
+</html>

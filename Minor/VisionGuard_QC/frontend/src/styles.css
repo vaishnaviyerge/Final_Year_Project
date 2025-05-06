@@ -1,0 +1,102 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #182848;
+  color: #fff;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.app-container {
+  text-align: center;
+  max-width: 900px;
+  width: 100%;
+  padding: 20px;
+  background-color: #333;
+  border-radius: 12px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.app-container h1, .app-container h2 {
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #ffdd57;
+}
+
+.sections {
+  display: flex;
+  gap: 20px;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.upload-section, .scanner-section {
+  background-color: #444;
+  padding: 20px;
+  border-radius: 10px;
+  width: 45%;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.uploaded-image, .video {
+  margin-top: 15px;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+button {
+  background-color: #ff5722;
+  color: white;
+  padding: 12px 24px;
+  margin-top: 10px;
+  font-size: 1em;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.extracted-info {
+  margin-top: 20px;
+  background-color: #555;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: left;
+}
+
+h2, h3 {
+  color: #ffdd57;
+}
+
+.scanner-section {
+  position: relative;
+}
+
+.video {
+  width: 100%;
+  max-height: 500px;
+  background-color: #000;
+  border-radius: 8px;
+}
+
+.scanner-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.scanner-buttons button {
+  flex: 1;
+  max-width: 200px;
+}
+
+/* Loading indicator */
+.loading {
+  color: #ffdd57;
+  font-style: italic;
+  margin-top: 10px;
+}

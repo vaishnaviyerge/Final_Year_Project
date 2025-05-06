@@ -1,0 +1,31 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tensorflow-models/coco-ssd": "^2.2.3",
+    "@tensorflow-models/mobilenet": "^2.1.1",
+    "@tensorflow/tfjs": "^4.22.0",
+    "@tensorflow/tfjs-node": "^4.22.0",
+    "cors": "^2.8.5",
+    "date-fns": "^4.1.0",
+    "express": "^4.21.1",
+    "mongoose": "^8.8.0",
+    "multer": "^1.4.5-lts.1",
+    "tesseract.js": "^5.1.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/multer": "^1.4.12"
+  }
+}

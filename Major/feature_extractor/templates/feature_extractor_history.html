@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Feature Extract History</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css/history-style.css' %}">
+</head>
+<style>
+        body {
+        /* background-image: url("{% static 'images/chips-bg.png' %}"); */
+        }
+    </style>
+<body>
+    <div class="container">
+        <header>
+            <h4>Feature Extract History</h4>
+        </header>
+         <div align="left"><a href="/"><i class="fa fa-arrow-left"></i> Home</a></div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>EAN</th>
+                    <th>MRP</th>
+                    <th>Manufactured Date</th>
+                    <th>Expiry Date</th>
+                    <th>Text</th>
+                    <th>is_valid</th>
+                    <th>Uploaded At</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for feature_extract in feature_extracts %}
+                <tr>
+                    <td><img src="{{ feature_extract.image.url }}" alt="Image"></td>
+                    <td>{{ feature_extract.EAN }}</td>
+                    <td>{{ feature_extract.MRP }}</td>
+                    <td>{{ feature_extract.manufactured_date }}</td>
+                    <td>{{ feature_extract.expiry_date }}</td>
+                    <td>{{ feature_extract.is_valid }}</td>
+                    <td>{{ feature_extract.text }}</td>
+                    <td>{{ feature_extract.uploaded_at }}</td>
+                    <td><a href="{% url 'feature_extractor_delete' feature_extract.id %}" class="btn btn-danger">Delete</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,224 @@
+/* Grocery Cyberpunk Theme - Smoothed & Grocery-Inspired */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&display=swap');
+
+:root {
+  --neon-green: #a8ff60;
+  --neon-orange: #ffaa55;
+  --neon-blue: #66d9ef;
+  --dark-bg: #0d1117;
+  --card-bg: rgba(20, 30, 25, 0.75);
+  --produce-glow: rgba(168, 255, 96, 0.3);
+  --dairy-glow: rgba(150, 230, 255, 0.3);
+  --meat-glow: rgba(255, 120, 120, 0.3);
+}
+
+body {
+  font-family: 'Rajdhani', 'Arial', sans-serif;
+  color: var(--neon-green);
+  background-color: var(--dark-bg);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    url('https://www.transparenttextures.com/patterns/black-paper.png'),
+    radial-gradient(circle at 20% 30%, rgba(168, 255, 96, 0.05), transparent 25%),
+    radial-gradient(circle at 80% 80%, rgba(102, 217, 239, 0.05), transparent 25%),
+    linear-gradient(to bottom, rgba(10, 15, 20, 0.95), rgba(5, 10, 15, 0.98));
+  background-blend-mode: overlay;
+}
+
+/* Background glow overlay */
+#particles-js {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: rgba(0, 15, 10, 0.75);
+  pointer-events: none;
+}
+
+/* Neon text */
+.neon-text {
+  text-shadow:
+    0 0 6px var(--neon-green),
+    0 0 15px var(--neon-green),
+    0 0 25px rgba(168, 255, 96, 0.3);
+}
+
+/* Header section */
+.header {
+  background: rgba(25, 45, 35, 0.6);
+  backdrop-filter: blur(10px);
+  margin: 30px auto;
+  width: 90%;
+  max-width: 1200px;
+  padding: 20px 40px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 0 30px rgba(168, 255, 96, 0.2);
+  border: 1px solid rgba(168, 255, 96, 0.2);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 2.4rem;
+  background: linear-gradient(to right, var(--neon-green), var(--neon-blue));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: flex;
+  align-items: center;
+}
+
+.header h1::before {
+  content: '🛍️';
+  margin-right: 15px;
+  filter: drop-shadow(0 0 6px var(--neon-green));
+}
+
+/* Cards */
+.grocery-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+  margin: 60px auto;
+  width: 90%;
+}
+
+.grocery-card {
+  width: 240px;
+  height: 320px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(168, 255, 96, 0.3);
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: float 6s ease-in-out infinite;
+}
+
+.grocery-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 0 45px rgba(168, 255, 96, 0.5);
+}
+
+/* Category Glows */
+.produce-card {
+  box-shadow: 0 0 30px var(--produce-glow);
+  border-color: rgba(168, 255, 96, 0.4);
+}
+
+.dairy-card {
+  box-shadow: 0 0 30px var(--dairy-glow);
+  border-color: rgba(150, 230, 255, 0.4);
+}
+
+.meat-card {
+  box-shadow: 0 0 30px var(--meat-glow);
+  border-color: rgba(255, 120, 120, 0.4);
+}
+
+.card-border-top {
+  height: 4px;
+  background: linear-gradient(to right, var(--neon-green), var(--neon-blue));
+}
+
+/* Grocery Icons */
+.grocery-icon {
+  width: 80px;
+  height: 80px;
+  font-size: 40px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 18px rgba(0, 255, 100, 0.3);
+  transition: all 0.3s ease-in-out;
+}
+
+.produce-icon {
+  color: var(--neon-green);
+  border: 2px solid var(--neon-green);
+}
+
+.dairy-icon {
+  color: var(--neon-blue);
+  border: 2px solid var(--neon-blue);
+}
+
+.meat-icon {
+  color: var(--neon-orange);
+  border: 2px solid var(--neon-orange);
+}
+
+/* Price Tag */
+.price-tag {
+  background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));
+  color: #000;
+  padding: 6px 18px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-top: 12px;
+  box-shadow: 0 0 12px rgba(168, 255, 96, 0.4);
+}
+
+/* Floating effect */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.grocery-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.grocery-card:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    text-align: center;
+    gap: 20px;
+  }
+
+  .grocery-cards {
+    gap: 20px;
+  }
+
+  .grocery-card {
+    width: 180px;
+    height: 260px;
+  }
+}
+
+/* Digital Grocery List */
+.grocery-list {
+  padding-left: 20px;
+  border-left: 3px solid var(--neon-green);
+  margin: 20px auto;
+  max-width: 600px;
+  font-size: 1.1rem;
+}
+
+.grocery-list li {
+  list-style: none;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.grocery-list li::before {
+  content: '✔️';
+  position: absolute;
+  left: 0;
+  color: var(--neon-green);
+}

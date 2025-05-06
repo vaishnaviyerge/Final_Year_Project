@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feature Extractor & Realtime Analysis</title>
+    <link rel="stylesheet" href="{% static 'css/main-style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+            /* background-image: url("{% static 'images/chips-bg.png' %}"); */
+        }
+
+        header {
+            background-color: #4dfa6a;
+            padding: 10px;
+            text-align: center;
+            border-bottom: 2px solid #007bff;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #007bff;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 12px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .box {
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .upload-box {
+            background-color: #fcfcfc;
+        }
+
+        .btn {
+            background-color: #00796b;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #005f56;
+            transform: scale(1.03);
+        }
+
+        .upload-btn-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+
+        .upload-btn-wrapper input[type=file] {
+            font-size: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+            font-style: italic;
+            color: #777;
+        }
+
+        .results {
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .results img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+        }
+
+        .result-details {
+            margin-top: 15px;
+            text-align: left;
+            font-size: 16px;
+        }
+
+        .result-details h3 {
+            color: #00796b;
+        }
+
+        .result-details p {
+            margin: 5px 0;
+        }
+
+        .result-details label {
+            font-weight: 600;
+            color: #444;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .tittu {
+            max-width: 100%;
+            text-align: center;
+            padding: 20px;
+            background-color: #eee;
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+        }
+
+        .top-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .top-actions a {
+            color: #007bff;
+        }
+    </style>
+    <script>
+        function showLoading() {
+            document.getElementById('loading').style.display = 'block';
+        }
+
+        function showFileName(input) {
+            const fileName = input.files[0].name;
+            document.getElementById('file-name').innerText = 'Selected file: ' + fileName;
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const startButton = document.getElementById("start-camera");
+            const stopButton = document.getElementById("stop-camera");
+            const webcam = document.getElementById("webcam");
+            let stream = null;
+
+            startButton?.addEventListener("click", async () => {
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                    try {
+                        stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                        webcam.srcObject = stream;
+                        webcam.style.display = "block";
+                    } catch (err) {
+                        console.error("Error accessing webcam:", err);
+                    }
+                } else {
+                    alert("Webcam not supported in this browser.");
+                }
+            });
+
+            stopButton?.addEventListener("click", () => {
+                if (stream) {
+                    const tracks = stream.getTracks();
+                    tracks.forEach((track) => track.stop());
+                    webcam.style.display = "none";
+                    webcam.srcObject = null;
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Home</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="top-actions">
+            <a href="/"><i class="fa fa-arrow-left"></i> Back</a>
+            <a href="history"><button class="btn">History</button></a>
+        </div>
+        <h1>Feature Extractor & Realtime Analysis</h1>
+        <div class="box upload-box">
+            <h2>Upload Image</h2>
+            <form method="post" enctype="multipart/form-data" onsubmit="showLoading()">
+                {% csrf_token %}
+                <div style="text-align:center;">
+                    <div class="upload-btn-wrapper" style="display: block; margin-bottom: 10px;">
+                        <button class="btn">Choose Image</button>
+                        <input type="file" name="image" accept="image/*" required onchange="showFileName(this)">
+                    </div>
+                    <button type="submit" class="btn" style="display: block; margin: 0 auto;">Extract Feature</button>
+                    <p id="file-name" style="margin-top: 10px; color: #555;"></p>
+                </div>
+            </form>
+            <div id="loading" class="loading">
+                <p>Processing your image...</p>
+            </div>
+            {% if image_uploaded %}
+                <div class="results">
+                    <img src="{{ uploaded_image_url }}" alt="Uploaded Image">
+                    <div class="result-details">
+                        <h3>Results:</h3>
+                        <p><label>MRP:</label> {{ MRP }}</p>
+                        <p><label>Mfg. Date:</label> {{ manufactured_date }}</p>
+                        <p><label>Exp. Date:</label> {{ expiry_date }}</p>
+                        <!-- <p><label>Is Valid:</label> {{ is_valid }}</p> -->
+                        <p><label>Text:</label> {{ text }}</p>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

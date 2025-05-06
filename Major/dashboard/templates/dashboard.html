@@ -1,0 +1,71 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/dashboard-style.css' %}">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTech-Final-Year</title>
+    <link rel="stylesheet" href="{% static 'css/dashboard-style.css' %}">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header class="header">
+        <div class="header-left">
+            <h1>Product Information Detector - Final Year Project</h1>
+        </div>
+        <div class="header-right">
+            {% if request.user.is_anonymous %}
+            <a href="{% url 'signin' %}" class="logout-button">Sign In</a>
+            {% else %}
+            <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+            {% endif %}
+        </div>
+    </header>
+    
+    <section class="features">
+        <div class="link-boxes">
+            <div class="card" id="a">
+                <div class="card-border-top"></div>
+                <img class="card-img" src="{% static 'images/fruits_veggies.jpg.png' %}" alt="Fruits and Vegetables">
+                <span>Real-time freshness of fruits and vegetables</span>
+                <button onclick="window.location.href='/fresh_detect/'">Quality Analysis</button>
+            </div>
+            <div class="card" id="b">
+                <div class="card-border-top"></div>
+                <img class="card-img" src="{% static 'D:\Documents\IMP docs\Flipkart_grid_6.0-main\static\images\Screenshot 2025-04-12 141703.png' %}" alt="Product Counting">
+                <span>Real-time efficient product counting</span><br>
+                <button onclick="window.location.href='/object_detect/'">Quantity Analysis</button>
+            </div>
+            <div class="card" id="c">
+                <div class="card-border-top"></div>
+                <img class="card-img" src="{% static 'images/labels.jpg.png' %}" alt="Product Labels">
+                <span>Extract essential details from product labels.</span>
+                <button onclick="window.location.href='/feat_extract/'">Feature Analysis</button>
+            </div>
+        </div>
+    </section>
+    
+    
+
+   
+   
+    <!-- <footer class="footer">
+        <div align="center">
+            <a href="https://github.com/gourab9817/Flipkart_grid_6.0" target="_blank">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" style="width: 25px; height: 25px; vertical-align: middle; margin-right: 5px; border-radius:50%;">
+                Source code on GitHub
+            </a>
+            <br>
+            © 2024 Hexagone. All rights reserved.
+        </div>
+    </footer> -->
+
+    <script>
+        particlesJS.load('particles-js', '{% static "js/particles.json" %}', function() {
+            console.log('particles.js loaded - callback');
+        });
+    </script>
+</body>
+</html>

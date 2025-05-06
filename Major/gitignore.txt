@@ -1,0 +1,14 @@
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore JetBrains IDE project files
+.idea/
+.idea
+
+venv
+
+
+uploads
+
+# ML Model
+# fruit_veg_freshness_model.h5
